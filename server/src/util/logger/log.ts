@@ -7,7 +7,7 @@ interface Cls {
 }
 
 interface Context {
-    [key: string]: string
+    [key: string]: string | undefined
 }
 
 @injectable()

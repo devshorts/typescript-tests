@@ -6,3 +6,4 @@ export function traceMiddleware(req: Request, res: Response, next: NextFunction)
         next()
     })
 }
+

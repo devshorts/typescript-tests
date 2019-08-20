@@ -3,6 +3,7 @@ import {log, Logger} from "./util/logger/log";
 import {Container, injectable} from "inversify";
 import {BIND_CONTROLLERS, ExampleServer} from "./api/api";
 import {Controller, HelloController} from "./api/controllers/hello";
+import {HttpBin} from "./services/bank_service";
 
 @injectable()
 class App {
@@ -25,6 +26,7 @@ const kernel = new Container({skipBaseClassChecks: true});
 
 kernel.bind(Logger).toSelf();
 kernel.bind(ExampleServer).toSelf();
+kernel.bind(HttpBin).toSelf().inSingletonScope();
 kernel.bind<Controller>(BIND_CONTROLLERS).to(HelloController);
 
 kernel.resolve(App).run();

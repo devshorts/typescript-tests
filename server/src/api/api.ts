@@ -2,9 +2,11 @@ import {log, Logger} from "../util/logger/log";
 import {Server} from "@overnightjs/core";
 import {Controller} from "./controllers/hello";
 import {injectable, multiInject} from "inversify";
+import {traceMiddleware} from "./middleware/trace";
+import {errorHandlerMiddleware} from "./middleware/errors";
 import bodyParser = require("body-parser");
 
-export const BIND_CONTROLLERS = "controllers"
+export const BIND_CONTROLLERS = "controllers";
 
 @injectable()
 export class ExampleServer extends Server {
@@ -17,8 +19,9 @@ export class ExampleServer extends Server {
         this.logger = log;
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({extended: true}));
-        // this.app.use(traceMiddleware)
+        this.app.use(traceMiddleware);
         this.setupControllers(controllers);
+        this.app.use(errorHandlerMiddleware);
     }
 
     private setupControllers(controllers: Controller[]): void {
