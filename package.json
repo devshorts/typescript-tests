@@ -1,0 +1,24 @@
+{
+  "name": "ns",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^3.5.3",
+    "gts": "^1.1.0",
+    "@types/node": "^12.7.2"
+  },
+  "private": true,
+  "workspaces": [
+    "server"
+  ],
+  "scripts": {
+    "check": "gts check",
+    "clean": "gts clean",
+    "compile": "tsc -p .",
+    "fix": "gts fix",
+    "prepare": "yarn run compile",
+    "pretest": "yarn run compile",
+    "posttest": "yarn run check"
+  }
+}
