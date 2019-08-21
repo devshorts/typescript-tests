@@ -19,6 +19,17 @@ class App {
 
         return
     }
+
+    close(): void {
+        this.server.stop()
+    }
 }
 
-defaultDI.resolve(App).run();
+const app = defaultDI.resolve(App);
+
+process.once('SIGINT', code => {
+    log.info('SIGINT received...');
+    app.close()
+});
+
+app.run();

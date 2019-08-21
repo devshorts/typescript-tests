@@ -1,0 +1,8 @@
+language: node_js
+node_js:
+  - 12
+script:
+  - yarn install
+  - yarn workspaces run build
+  - yarn workspaces run test
+  - yarn workspaces run package

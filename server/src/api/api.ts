@@ -4,9 +4,11 @@ import {Controller} from "./controllers/hello";
 import {injectable, multiInject} from "inversify";
 import {traceMiddleware} from "./middleware/trace";
 import {errorHandlerMiddleware} from "./middleware/errors";
+import * as http from "http";
+import {Shutdown} from "./middleware/shutdown";
 import bodyParser = require("body-parser");
 import getEndpoints = require("express-list-endpoints");
-import {Application} from "express";
+import {Application} from "express-serve-static-core";
 
 export const BIND_CONTROLLERS = "controllers";
 
@@ -14,11 +16,16 @@ export const BIND_CONTROLLERS = "controllers";
 export class ExampleServer extends Server {
 
     private readonly SERVER_STARTED = 'Example server started on port: ';
-    private logger: Logger;
+    private readonly logger: Logger;
+    private readonly http: http.Server;
+    private readonly shutdown: Shutdown;
 
     constructor(@multiInject(BIND_CONTROLLERS) controllers: Controller[]) {
         super(false);
+        this.http = http.createServer(this.app);
         this.logger = log;
+        this.shutdown = new Shutdown(this.http);
+        this.app.use(this.shutdown.middleware);
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({extended: true}));
         this.app.use(traceMiddleware);
@@ -36,6 +43,10 @@ export class ExampleServer extends Server {
         return this.app
     }
 
+    stop(): void {
+        this.shutdown.shutdown()
+    }
+
     start(port: number): void {
         for (const listEndpoint of getEndpoints(this.app)) {
             for (const method of listEndpoint.methods) {
@@ -43,7 +54,7 @@ export class ExampleServer extends Server {
             }
         }
 
-        this.app.listen(port, () => {
+        this.http.listen(port, () => {
             this.logger.info(this.SERVER_STARTED + port);
         });
     }
