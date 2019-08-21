@@ -1,9 +1,8 @@
 import "reflect-metadata";
-import {log, Logger} from "./util/logger/log";
-import {Container, injectable} from "inversify";
-import {BIND_CONTROLLERS, ExampleServer} from "./api/api";
-import {Controller, HelloController} from "./api/controllers/hello";
-import {HttpBin} from "./services/bank_service";
+import {log} from "./util/logger/log";
+import {injectable} from "inversify";
+import {ExampleServer} from "./api/api";
+import {defaultDI} from "./modules/kernel";
 
 @injectable()
 class App {
@@ -14,7 +13,7 @@ class App {
     }
 
     run(): void {
-        log.info("server starting");
+        log.info("app starting");
 
         this.server.start(9090);
 
@@ -22,11 +21,4 @@ class App {
     }
 }
 
-const kernel = new Container({skipBaseClassChecks: true});
-
-kernel.bind(Logger).toSelf();
-kernel.bind(ExampleServer).toSelf();
-kernel.bind(HttpBin).toSelf().inSingletonScope();
-kernel.bind<Controller>(BIND_CONTROLLERS).to(HelloController);
-
-kernel.resolve(App).run();
+defaultDI.resolve(App).run();

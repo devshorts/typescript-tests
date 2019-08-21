@@ -18,15 +18,15 @@ export class HttpBin {
 
         const result: Root = JSON.parse(data);
 
-        // if (result.slideshow === undefined) {
+        if (result.slideshow === undefined) {
             throw new Error("missing required data")
-        // }
-        //
-        // return {
-        //     slideshow: {
-        //         author: result.slideshow.author,
-        //         date: result.slideshow.date
-        //     }
-        // }
+        }
+
+        return {
+            slideshow: {
+                author: result.slideshow.author,
+                date: result.slideshow.date
+            }
+        }
     }
 }

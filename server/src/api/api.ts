@@ -5,6 +5,8 @@ import {injectable, multiInject} from "inversify";
 import {traceMiddleware} from "./middleware/trace";
 import {errorHandlerMiddleware} from "./middleware/errors";
 import bodyParser = require("body-parser");
+import getEndpoints = require("express-list-endpoints");
+import {Application} from "express";
 
 export const BIND_CONTROLLERS = "controllers";
 
@@ -15,7 +17,7 @@ export class ExampleServer extends Server {
     private logger: Logger;
 
     constructor(@multiInject(BIND_CONTROLLERS) controllers: Controller[]) {
-        super(true);
+        super(false);
         this.logger = log;
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({extended: true}));
@@ -30,7 +32,17 @@ export class ExampleServer extends Server {
         }
     }
 
+    express(): Application {
+        return this.app
+    }
+
     start(port: number): void {
+        for (const listEndpoint of getEndpoints(this.app)) {
+            for (const method of listEndpoint.methods) {
+                log.info(`${method}:    ${listEndpoint.path}`)
+            }
+        }
+
         this.app.listen(port, () => {
             this.logger.info(this.SERVER_STARTED + port);
         });
