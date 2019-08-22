@@ -12,20 +12,20 @@ describe("api tests", () => {
     });
 
     test("api", done => {
-        const server = defaultDI.get(ExampleServer);
-
-        supertest(server.express())
+        supertest(server().express())
             .get("/hello/bank/1")
             .expect(200)
             .end(done)
     });
 
     test("missing route", done => {
-        const server = defaultDI.get(ExampleServer);
-
-        supertest(server.express())
+        supertest(server().express())
             .get("/asdf/bank/2")
             .expect(404)
             .end(done)
     });
 });
+
+const server = () => {
+    return defaultDI().defaults().withConfig({http_bin: "https://httpbin.org/json"}).get().resolve(ExampleServer);
+}

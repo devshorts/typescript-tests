@@ -1,4 +1,4 @@
-import {createNamespace, getNamespace} from "cls-hooked";
+import {createNamespace} from "cls-hooked";
 import uuid = require("uuid");
 
 const name = "server";
@@ -9,9 +9,12 @@ export const traceID = (): string => {
     return ns.get("trace")
 };
 
-export function withNewTrace(fun: () => void) {
-    return ns.run(() => {
-        ns.set("trace", uuid.v1())
-        fun()
+export function withNewTrace<T>(fun: () => T, trace?: string): T {
+    return ns.runAndReturn<T>((): T => {
+        if (trace === undefined) {
+            trace = uuid.v1()
+        }
+        ns.set("trace", trace)
+        return fun()
     })
 }

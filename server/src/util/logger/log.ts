@@ -18,7 +18,7 @@ export class Logger {
             winston.format.timestamp(),
             winston.format.json()),
         transports: [
-            new winston.transports.Console({level: 'debug', debugStdout: false}),
+            new winston.transports.Console({level: 'info', debugStdout: false}),
         ],
     });
     private readonly ctx: Context;

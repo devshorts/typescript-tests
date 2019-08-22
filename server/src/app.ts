@@ -1,24 +1,25 @@
 import "reflect-metadata";
 import {log} from "./util/logger/log";
-import {injectable, inject} from "inversify";
+import {inject, injectable} from "inversify";
 import {ExampleServer} from "./api/api";
 import {defaultDI} from "./modules/kernel";
+import {Bank, Consumer} from "./queue/pubsub";
+import {load} from "./config/loader";
 
 @injectable()
 class App {
-    private server: ExampleServer;
-
-    constructor(server: ExampleServer) {
-        this.server = server;
-
-        process.once('SIGINT', code => {
+    constructor(
+        private server: ExampleServer,
+        @inject("sqs_consumer") private consumer: Consumer<Bank>,
+    ) {
+        process.once('SIGINT', () => {
             log.info('SIGINT received...');
             this.close()
         });
     }
 
     run(): void {
-        // log.info("app starting");
+        log.info("app starting");
 
         this.server.start(9090);
 
@@ -30,4 +31,6 @@ class App {
     }
 }
 
-export const app = defaultDI.resolve(App);
+const config = load(process.env.CONFIG_PATH, process.env.NODE_ENV);
+
+export const app = defaultDI().defaults().withConfig(config).get().resolve(App);

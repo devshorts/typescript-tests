@@ -1,6 +1,7 @@
+import "reflect-metadata";
 import {load} from "./loader";
 
 test("loads", () => {
-    const config = load("dev");
+    const config = load("config", "dev");
     expect(config).not.toBeNull()
 });

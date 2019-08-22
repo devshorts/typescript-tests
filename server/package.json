@@ -4,6 +4,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/cls-hooked": "^4.3.0",
+    "@types/convict": "^4.2.1",
     "@types/express": "^4.17.1",
     "@types/jest": "^24.0.18",
     "@types/request": "^2.48.2",
@@ -28,10 +29,11 @@
     "test": "jest --forceExit --coverage --verbose --detectOpenHandles",
     "watch-test": "npm run test -- --watchAll",
     "build-ts": "tsc",
+    "copy-config": "mkdir -p build/config/ && cp config/* build/config/",
     "watch-ts": "tsc -w",
     "lint": "tsc --noEmit && eslint \"**/*.{js,ts}\" --quiet --fix",
     "debug": "npm run build && npm run watch-debug",
-    "serve-debug": "nodemon --inspect build/src/index.js",
+    "serve-debug": "CONFIG_PATH=config nodemon --inspect build/src/index.js",
     "watch-debug": "concurrently -k -p \"[{name}]\" -n \"Sass,TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-sass\" \"npm run watch-ts\" \"npm run serve-debug\""
   },
   "dependencies": {
@@ -39,6 +41,7 @@
     "body-parser": "^1.19.0",
     "class-transformer": "^0.2.3",
     "cls-hooked": "^4.2.2",
+    "convict": "^5.1.0",
     "express": "^4.17.1",
     "express-async-handler": "^1.1.4",
     "express-list-endpoints": "^4.0.1",
