@@ -7,7 +7,7 @@ interface Cls {
 }
 
 interface Context {
-    [key: string]: string | undefined
+    [key: string]: string | number | undefined
 }
 
 @injectable()
@@ -18,7 +18,7 @@ export class Logger {
             winston.format.timestamp(),
             winston.format.json()),
         transports: [
-            new winston.transports.Console({level: 'info'}),
+            new winston.transports.Console({level: 'debug', debugStdout: false}),
         ],
     });
     private readonly ctx: Context;

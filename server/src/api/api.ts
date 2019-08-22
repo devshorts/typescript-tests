@@ -9,6 +9,7 @@ import {Shutdown} from "./middleware/shutdown";
 import bodyParser = require("body-parser");
 import getEndpoints = require("express-list-endpoints");
 import {Application} from "express-serve-static-core";
+import {timingMiddleware} from "./middleware/timing";
 
 export const BIND_CONTROLLERS = "controllers";
 
@@ -29,6 +30,7 @@ export class ExampleServer extends Server {
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({extended: true}));
         this.app.use(traceMiddleware);
+        this.app.use(timingMiddleware);
         this.setupControllers(controllers);
         this.app.use(errorHandlerMiddleware);
     }

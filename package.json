@@ -10,7 +10,7 @@
   },
   "private": true,
   "workspaces": [
-    "server"
+    "server", "cmd"
   ],
   "scripts": {
     "check": "gts check",
