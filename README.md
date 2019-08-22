@@ -11,3 +11,18 @@ Supports
 - Command library
 - Yarn workspaces
 - Example pubsub
+
+To run:
+
+```
+yarn install
+yarn workspaces run build
+yarn workspaces run test
+```
+
+To host API
+
+```
+cd server
+yarn run serve
+```
