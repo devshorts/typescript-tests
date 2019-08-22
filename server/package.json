@@ -24,7 +24,7 @@
     "package": "npm run build && ./package.sh",
     "start": "npm run serve",
     "build": "npm run build-ts",
-    "serve": "node build/src/index.js",
+    "serve": "CONFIG_PATH=config node build/src/index.js",
     "watch-node": "nodemon build/src/index.js",
     "test": "jest --forceExit --coverage --verbose --detectOpenHandles",
     "watch-test": "npm run test -- --watchAll",
