@@ -13,15 +13,23 @@ cache:
   paths:
     - node_modules/
 
+stages:
+  - build
+  - test
+  - package
+
 build:
+  stage: build
   script:
     - yarn install 
     - yarn workspaces run build
-    - yarn workspaces run test
-    - yarn workspaces run package
-    
+
 test:
+  stage: test
   script:
-    - yarn install 
-    - yarn workspaces run build
     - yarn workspaces run test
+
+package:
+  stage: package
+  script:
+    - yarn workspaces run package
