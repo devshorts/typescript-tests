@@ -52,7 +52,7 @@
     "test": "echo NO TESTS",
     "version": "oclif-dev readme && git add README.md",
     "build": "echo SKIP",
-    "package": "echo SKIP",
+    "package": "echo SKIP"
   },
   "types": "lib/index.d.ts"
 }
