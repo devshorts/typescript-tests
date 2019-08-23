@@ -5,4 +5,9 @@ script:
   - yarn install
   - yarn workspaces run build
   - yarn workspaces run test
-  - yarn workspaces run package
+
+deploy:
+  provider: script
+  script: yarn workspaces run package
+  on:
+    branch: master
