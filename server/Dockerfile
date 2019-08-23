@@ -13,7 +13,9 @@ COPY dist/ .
 COPY package.json .
 
 COPY yarn.lock .
+COPY .yarnrc .
+ADD npm-packages-offline-cache npm-packages-offline-cache
 
-RUN yarn install --production --pure-lockfile --non-interactive --cache-folder ./ycache; rm -rf ./ycache
+RUN cat .yarnrc && ls -lah && pwd && yarn install --offline --production --pure-lockfile --non-interactive --cache-folder ./ycache; rm -rf ./ycache
 
 CMD ["node", "src/index.js"]
