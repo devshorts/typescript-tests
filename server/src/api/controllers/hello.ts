@@ -1,23 +1,17 @@
 import {injectable} from "inversify";
 import {ClassWrapper, Controller, Get} from "@overnightjs/core";
 import {Request, Response} from "express";
-import {log} from "../../util/logger/log";
 import * as expressAsyncHandler from 'express-async-handler';
 import {OK} from 'http-status-codes';
 import {HttpBin} from "../../services/bank_service";
+import {APIController} from "./interfaces";
 
-export interface Controller {
-}
 
 @injectable()
 @Controller("hello")
 @ClassWrapper(expressAsyncHandler)
-export class HelloController implements Controller {
-    private log = log.with({controller: 'hello'});
-    private bank: HttpBin;
-
-    constructor(bank: HttpBin) {
-        this.bank = bank;
+export class HelloController implements APIController {
+    constructor(private bank: HttpBin) {
     }
 
     @Get("bank/:id")

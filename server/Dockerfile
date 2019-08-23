@@ -7,7 +7,7 @@ ENV NODE_ENV=production
 FROM base AS dependencies
 
 # We only copy the dependencies we need
-COPY build/ .
+COPY dist/ .
 
 # The global package.json only contains build dependencies
 COPY package.json .

@@ -1,15 +1,15 @@
 import {log, Logger} from "../util/logger/log";
 import {Server} from "@overnightjs/core";
-import {Controller} from "./controllers/hello";
 import {injectable, multiInject} from "inversify";
 import {traceMiddleware} from "./middleware/trace";
 import {errorHandlerMiddleware} from "./middleware/errors";
 import * as http from "http";
 import {Shutdown} from "./middleware/shutdown";
-import bodyParser = require("body-parser");
-import getEndpoints = require("express-list-endpoints");
 import {Application} from "express-serve-static-core";
 import {timingMiddleware} from "./middleware/timing";
+import {APIController} from "./controllers/interfaces";
+import bodyParser = require("body-parser");
+import getEndpoints = require("express-list-endpoints");
 
 export const BIND_CONTROLLERS = "controllers";
 
@@ -21,7 +21,7 @@ export class ExampleServer extends Server {
     private readonly http: http.Server;
     private readonly shutdown: Shutdown;
 
-    constructor(@multiInject(BIND_CONTROLLERS) controllers: Controller[]) {
+    constructor(@multiInject(BIND_CONTROLLERS) controllers: APIController[]) {
         super(false);
         this.http = http.createServer(this.app);
         this.logger = log;
@@ -35,7 +35,7 @@ export class ExampleServer extends Server {
         this.app.use(errorHandlerMiddleware);
     }
 
-    private setupControllers(controllers: Controller[]): void {
+    private setupControllers(controllers: APIController[]): void {
         for (const controller of controllers) {
             super.addControllers(controller);
         }

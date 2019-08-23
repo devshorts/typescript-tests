@@ -23,18 +23,17 @@
   "scripts": {
     "package": "npm run build && ./package.sh",
     "start": "npm run serve",
-    "build": "npm run build-ts",
-    "serve": "CONFIG_PATH=config node build/src/index.js",
-    "watch-node": "nodemon build/src/index.js",
+    "build": "npm run build-ts && npm run lint",
+    "serve": "CONFIG_PATH=config node dist/src/index.js",
     "test": "jest --forceExit --coverage --verbose --detectOpenHandles",
-    "watch-test": "npm run test -- --watchAll",
     "build-ts": "tsc",
-    "copy-config": "mkdir -p build/config/ && cp config/* build/config/",
-    "watch-ts": "tsc -w",
-    "lint": "tsc --noEmit && eslint \"**/*.{js,ts}\" --quiet --fix",
+    "lint": "tslint --project . --fix",
+    "copy-config": "mkdir -p dist/config/ && cp config/* dist/config/",
     "debug": "npm run build && npm run watch-debug",
-    "serve-debug": "CONFIG_PATH=config nodemon --inspect build/src/index.js",
-    "watch-debug": "concurrently -k -p \"[{name}]\" -n \"Sass,TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-sass\" \"npm run watch-ts\" \"npm run serve-debug\""
+    "watch-test": "npm run test -- --watchAll",
+    "lint-watch": "nodemon --exec 'npm run lint'",
+    "watch-ts": "tsc -w",
+    "serve-debug": "CONFIG_PATH=config nodemon --inspect dist/src/index.js"
   },
   "dependencies": {
     "@overnightjs/core": "^1.6.9",
