@@ -2,7 +2,12 @@ import {NextFunction, Request, Response} from "express";
 import {traceID} from "../../util/trace/trace";
 import {log} from "../../util/logger/log";
 
-export function errorHandlerMiddleware(error: Error, req: Request, res: Response, next: NextFunction) {
+export interface ErrorBody {
+    msg: string
+    trace: string
+}
+
+export function errorHandlerMiddleware(error: Error | undefined, req: Request, res: Response, next: NextFunction) {
     if (error !== undefined) {
         log.with({
             error_message: error.message,
