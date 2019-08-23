@@ -13,6 +13,9 @@ cache:
   paths:
     - node_modules/
 
+services:
+  - docker:dind
+
 stages:
   - build
   - test
