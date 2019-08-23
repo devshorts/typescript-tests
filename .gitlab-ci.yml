@@ -16,23 +16,16 @@ cache:
 services:
   - docker:dind
 
-stages:
-  - build
-  - test
-  - package
 
 build:
-  stage: build
   script:
     - yarn install 
     - yarn workspaces run build
 
 test:
-  stage: test
   script:
     - yarn workspaces run test
 
 package:
-  stage: package
   script:
     - yarn workspaces run package
