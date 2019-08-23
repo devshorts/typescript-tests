@@ -13,13 +13,6 @@ export class Shutdown {
     }
 
     shutdown(onReady: () => void = () => process.exit(1)) {
-        // Don't bother with graceful shutdown on development to speed up round trip
-        if (!process.env.NODE_ENV) {
-            log.info("Hard shutdown");
-
-            process.exit(1)
-        }
-
         log.info("Waiting for http listener to drain");
 
         this._shutdown = true;
