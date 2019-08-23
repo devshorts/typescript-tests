@@ -21,7 +21,7 @@
     "typescript": "^3.5.3"
   },
   "scripts": {
-    "package": "npm run build && ./package.sh",
+    "package": "./package.sh",
     "start": "npm run serve",
     "build": "npm run build-ts && npm run lint",
     "serve": "CONFIG_PATH=config node dist/src/index.js",
