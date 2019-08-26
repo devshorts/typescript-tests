@@ -7,6 +7,5 @@ declare module 'express-list-endpoints' {
     }
 
     function getEndpoints(app: Application): Endpoint[];
-
     export = getEndpoints
 }

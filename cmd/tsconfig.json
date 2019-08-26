@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "types": ["reflect-metadata", "jest"],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "moduleResolution": "node",
@@ -11,7 +12,10 @@
     "strict": true,
     "target": "es2017"
   },
+  "references": [
+    {"path": "../server" }
+  ],
   "include": [
-    "src/**/*"
+    "src/**/*.ts"
   ]
 }

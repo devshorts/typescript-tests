@@ -44,14 +44,14 @@
       "@oclif/plugin-help"
     ]
   },
-  "repository": "akropp-stripe/cmd",
+  "repository": "akropp/cmd",
   "scripts": {
     "postpack": "rm -f oclif.manifest.json",
     "posttest": "tslint -p . -t stylish",
     "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
     "test": "echo NO TESTS",
     "version": "oclif-dev readme && git add README.md",
-    "build": "echo SKIP",
+    "build": "tsc --build",
     "package": "echo SKIP"
   },
   "types": "lib/index.d.ts"

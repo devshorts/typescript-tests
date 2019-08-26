@@ -6,6 +6,8 @@
     "emitDecoratorMetadata": true,
     "moduleResolution": "node",
     "declaration": true,
-    "importHelpers": true
+    "importHelpers": true,
+    "composite": true,
+    "target": "esnext"
   }
 }

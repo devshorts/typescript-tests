@@ -20,18 +20,18 @@ export class Builder {
         return this.kernel
     }
 
-    defaults(): Builder {
-        this.kernel.bind(Logger).toSelf();
-        this.kernel.bind(ExampleServer).toSelf();
-        this.kernel.bind(HttpBin).toSelf().inSingletonScope();
-        this.kernel.bind<APIController>(BIND_CONTROLLERS).to(HelloController);
-        this.kernel.bind<Consumer<Bank>>("sqs_consumer").to(SQS)
-        this.kernel.bind<Publisher<Bank>>("sqs_publisher").to(Publisher)
+    defaults(): this {
+        this.get().bind(Logger).toSelf();
+        this.get().bind(ExampleServer).toSelf();
+        this.get().bind(HttpBin).toSelf().inSingletonScope();
+        this.get().bind<APIController>(BIND_CONTROLLERS).to(HelloController);
+        this.get().bind<Consumer<Bank>>("sqs_consumer").to(SQS)
+        this.get().bind<Publisher<Bank>>("sqs_publisher").to(Publisher)
         return this
     }
 
-    withConfig(t: Config) {
-        this.kernel.bind("config").toConstantValue(t)
+    withConfig(t: Config): this {
+        this.get().bind("config").toConstantValue(t)
         return this
     }
 }

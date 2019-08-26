@@ -21,7 +21,9 @@ export class ExampleServer extends Server {
     private readonly http: http.Server;
     private readonly shutdown: Shutdown;
 
-    constructor(@multiInject(BIND_CONTROLLERS) controllers: APIController[]) {
+    constructor(
+        @multiInject(BIND_CONTROLLERS) controllers: APIController[],
+    ) {
         super(false);
         this.http = http.createServer(this.app);
         this.logger = log;

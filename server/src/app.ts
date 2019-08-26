@@ -4,7 +4,7 @@ import {inject, injectable} from "inversify";
 import {ExampleServer} from "./api/api";
 import {defaultDI} from "./modules/kernel";
 import {Bank, Consumer} from "./queue/pubsub";
-import {load} from "./config/loader";
+import {Config, load} from "./config/loader";
 
 @injectable()
 class App {
@@ -31,6 +31,8 @@ class App {
     }
 }
 
-const config = load(process.env.CONFIG_PATH, process.env.NODE_ENV);
+export const config = () => load(process.env.CONFIG_PATH, process.env.NODE_ENV);
 
-export const app = defaultDI().defaults().withConfig(config).get().resolve(App);
+export function app(config: Config): App {
+    return defaultDI().defaults().withConfig(config).get().resolve(App);
+}

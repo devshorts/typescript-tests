@@ -26,7 +26,7 @@
     "build": "npm run build-ts && npm run lint",
     "serve": "CONFIG_PATH=config node dist/src/index.js",
     "test": "jest --forceExit --coverage --verbose --detectOpenHandles",
-    "build-ts": "tsc",
+    "build-ts": "tsc --build --clean",
     "lint": "tslint --project . --fix",
     "copy-config": "mkdir -p dist/config/ && cp config/* dist/config/",
     "debug": "npm run build && npm run watch-debug",
