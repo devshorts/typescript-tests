@@ -1,1 +1,0 @@
-{"version":"1.0.0","commands":{"service":{"id":"service","description":"describe the command here","pluginName":"cmd","pluginType":"core","aliases":[],"examples":["$ cmd hello\nhello world from ./src/hello.ts!\n"],"flags":{"config":{"name":"config","type":"option"},"env":{"name":"env","type":"option","helpValue":"(dev)","options":["dev"]}},"args":[]}}}

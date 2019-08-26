@@ -1,6 +1,6 @@
 import {log} from "../util/logger/log";
-import * as convict from 'convict'
 import * as path from 'path'
+import * as convict from 'convict'
 
 export interface Config {
     http_bin: string
@@ -28,7 +28,7 @@ export function load(configRoot: string | undefined, env: string | undefined): C
 
     const loaded = config.get()
 
-    if (loaded.http_bin === ""){
+    if (loaded.http_bin === "") {
         throw new Error("http bin not set")
     }
 
