@@ -5,7 +5,7 @@ import * as http from "http";
 describe('shutdown', () => {
     it('should shutdown', () => {
         const server = new http.Server(undefined);
-        server['close'] = jest.fn().mockImplementation(result => result())
+        server.close = jest.fn().mockImplementation(result => result())
 
         const shutdown = new Shutdown(server)
 
