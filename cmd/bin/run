@@ -1,5 +1,6 @@
-#!/usr/bin/env node
+#!/usr/bin/env bash
 
-require('@oclif/command').run()
-.then(require('@oclif/command/flush'))
-.catch(require('@oclif/errors/handle'))
+DIR="$( cd "$( dirname "$0" )" && pwd )"
+
+# hook into tsconfig-paths to support path module references
+node -r tsconfig-paths/register $DIR/_run.js "$@"

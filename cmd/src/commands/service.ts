@@ -1,8 +1,9 @@
 import {app} from "server/src/app";
 import {Command, flags} from '@oclif/command'
-import {ActionBase, cli} from 'cli-ux'
+import {cli} from 'cli-ux'
 import SpinnerAction from "cli-ux/lib/action/spinner";
 import {spinners} from "../util/spinners";
+import {SQS} from "server/src/queue/pubsub";
 
 export class Service extends Command {
     static description = 'describe the command here'
@@ -31,12 +32,19 @@ hello world from ./src/hello.ts!
 
         cli.action.start('starting a process')
 
+        const x = new SQS<string>()
+
+        await x.process({
+            data: "foo",
+            traceID: "bar"
+        })
+
         return new Promise(resolve => {
             setTimeout(() => {
                 cli.action.stop('ready!')
                 resolve()
                 app({http_bin: 'https://httpbin.org/json'}).run()
-            }, 3000)
+            }, 100)
         })
     }
 }

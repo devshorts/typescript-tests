@@ -1,5 +1,15 @@
 {
   "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "sourceRoot": "src",
+    "baseUrl": ".",
+    "paths": {
+      "server/src/*": [
+        "../server/dist/src/*"
+      ]
+    }
+  },
   "references": [
     {
       "path": "../server"

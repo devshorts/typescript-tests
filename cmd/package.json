@@ -10,8 +10,7 @@
     "@oclif/command": "^1",
     "@oclif/config": "^1",
     "@oclif/plugin-help": "^2",
-    "server": "^1.0.0",
-    "tsdist": "^1"
+    "server": "^1.0.0"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1",
@@ -20,6 +19,7 @@
     "globby": "^10",
     "nodemon": "^1.19.1",
     "ts-node": "^8",
+    "tsconfig-paths": "^3.8.0",
     "tslint": "^5",
     "typescript": "^3.3"
   },
@@ -39,16 +39,16 @@
   "license": "MIT",
   "main": "dist/index.js",
   "oclif": {
-    "commands": "./src/commands",
+    "commands": "./dist/src/commands",
     "bin": "cmd",
     "plugins": [
       "@oclif/plugin-help"
     ]
   },
-  "repository": "akropp-stripe/cmd",
+  "repository": "akropp/cmd",
   "scripts": {
-    "build": "tsc",
-    "watch-ts-cmd": "tsc -w --pretty",
+    "build": "tsc -b",
+    "watch-ts-cmd": "tsc -b -w --pretty",
     "postpack": "rm -f oclif.manifest.json",
     "posttest": "tslint -p . -t stylish",
     "prepack": "npm run build && oclif-dev manifest && oclif-dev readme",
