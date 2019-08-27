@@ -28,28 +28,8 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`cmd hello [FILE]`](#cmd-hello-file)
 * [`cmd help [COMMAND]`](#cmd-help-command)
-
-## `cmd hello [FILE]`
-
-describe the command here
-
-```
-USAGE
-  $ cmd hello [FILE]
-
-OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
-
-EXAMPLE
-  $ cmd hello
-  hello world from ./src/hello.ts!
-```
-
-_See code: [src/commands/hello.ts](https://github.com/akropp-stripe/cmd/blob/v1.0.0/src/commands/hello.ts)_
+* [`cmd service [FILE]`](#cmd-service-file)
 
 ## `cmd help [COMMAND]`
 
@@ -67,4 +47,24 @@ OPTIONS
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.2.1/src/commands/help.ts)_
+
+## `cmd service [FILE]`
+
+describe the command here
+
+```
+USAGE
+  $ cmd service [FILE]
+
+OPTIONS
+  -f, --force
+  -h, --help       show CLI help
+  -n, --name=name  name to print
+
+EXAMPLE
+  $ cmd hello
+  hello world from ./src/hello.ts!
+```
+
+_See code: [src/commands/service.ts](https://github.com/akropp-stripe/cmd/blob/v1.0.0/src/commands/service.ts)_
 <!-- commandsstop -->

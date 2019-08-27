@@ -11,7 +11,7 @@
     "@oclif/config": "^1",
     "@oclif/plugin-help": "^2",
     "server": "^1.0.0",
-    "tslib": "^1"
+    "tsdist": "^1"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1",
@@ -28,7 +28,7 @@
   },
   "files": [
     "/bin",
-    "/lib",
+    "/dist",
     "/npm-shrinkwrap.json",
     "/oclif.manifest.json"
   ],
@@ -37,9 +37,9 @@
     "oclif"
   ],
   "license": "MIT",
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "oclif": {
-    "commands": "./lib/commands",
+    "commands": "./src/commands",
     "bin": "cmd",
     "plugins": [
       "@oclif/plugin-help"
@@ -48,12 +48,11 @@
   "repository": "akropp-stripe/cmd",
   "scripts": {
     "build": "tsc",
+    "watch-ts-cmd": "tsc -w --pretty",
     "postpack": "rm -f oclif.manifest.json",
     "posttest": "tslint -p . -t stylish",
-    "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
-    "start": "node dist/src/index.js",
-    "test": "echo NO TESTS",
-    "version": "oclif-dev readme && git add README.md"
+    "prepack": "npm run build && oclif-dev manifest && oclif-dev readme",
+    "test": "echo NO TESTS"
   },
-  "types": "lib/index.d.ts"
+  "types": "dist/index.d.ts"
 }

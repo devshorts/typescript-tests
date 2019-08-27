@@ -1,13 +1,10 @@
 {
-  "compilerOptions": {
-    "declaration": true,
-    "importHelpers": true,
-    "module": "commonjs",
-    "outDir": "lib",
-    "rootDir": "src",
-    "strict": true,
-    "target": "es2017"
-  },
+  "extends": "../tsconfig.json",
+  "references": [
+    {
+      "path": "../server"
+    }
+  ],
   "include": [
     "src/**/*"
   ]
