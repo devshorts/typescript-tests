@@ -2,28 +2,15 @@ import 'reflect-metadata'
 import * as Dockerode from "dockerode";
 import * as portfinder from 'portfinder'
 import {Docker, DockerBase, PortMapping} from "./base";
-import {Sequelize} from "sequelize";
-import {Promises} from "../time/timeout";
-import {log} from "../logger/log";
-import moment = require("moment");
+import {Connection} from "./connection";
 
 export class MysqlContainer extends Docker {
-    private sequelize: Sequelize;
+    conn: Connection;
 
     constructor(mapping: PortMapping, container: Dockerode.Container) {
         super(mapping, container);
 
-        this.sequelize = new Sequelize('', 'root', '', {
-            host: 'localhost',
-            dialect: 'mysql',
-            port: this.mapping["3306"]
-        });
-    }
-
-    async connect() {
-        log.info(`trying... ${this.mapping["3306"]}`)
-
-        await new Promise((r, f) => this.sequelize.authenticate().then(r).catch(f))
+        this.conn = new Connection(this.mapping["3306"], 'mysql')
     }
 }
 
@@ -62,20 +49,8 @@ export class Mysql extends DockerBase {
 
         const mysql = new MysqlContainer(mapping, container)
 
-        const end = moment().add(10, "seconds")
+        await mysql.conn.connect(60)
 
-        while (moment().isBefore(end)) {
-            try {
-                await mysql.connect()
-
-                log.info("connected!")
-
-                return mysql
-            } catch (e) {
-                await Promises.timeout(250)
-            }
-        }
-
-        throw new Error("timed out connecting")
+        return mysql
     }
 }
