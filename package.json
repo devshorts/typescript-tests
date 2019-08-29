@@ -15,6 +15,7 @@
   "scripts": {
     "check": "gts check",
     "clean": "gts clean",
-    "fix": "gts fix"
+    "fix": "gts fix",
+    "watch": "tsc --build -w"
   }
 }
