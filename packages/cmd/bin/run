@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+DIR="$( cd "$( dirname "$0" )" && pwd )"
+
+# hook into tsconfig-paths to support path module references
+node -r $DIR/_run.js "$@"

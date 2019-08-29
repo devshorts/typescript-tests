@@ -1,0 +1,58 @@
+{
+  "name": "@paradox/cmd",
+  "version": "1.0.0",
+  "author": "Anton Kropp @akropp-stripe",
+  "bin": {
+    "cmd": "./bin/run"
+  },
+  "bugs": "https://github.com/akropp-stripe/cmd/issues",
+  "dependencies": {
+    "@oclif/command": "^1",
+    "@oclif/config": "^1",
+    "@oclif/plugin-help": "^2",
+    "@paradox/server": "^1.0.0"
+  },
+  "devDependencies": {
+    "@oclif/dev-cli": "^1",
+    "@oclif/tslint": "^3",
+    "@types/node": "^10",
+    "globby": "^10",
+    "nodemon": "^1.19.1",
+    "ts-node": "^8",
+    "tsconfig-paths": "^3.8.0",
+    "tslint": "^5",
+    "typescript": "^3.3"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "files": [
+    "/bin",
+    "/dist",
+    "/npm-shrinkwrap.json",
+    "/oclif.manifest.json"
+  ],
+  "homepage": "https://github.com/akropp-stripe/cmd",
+  "keywords": [
+    "oclif"
+  ],
+  "license": "MIT",
+  "main": "dist/index.js",
+  "oclif": {
+    "commands": "./dist/src/commands",
+    "bin": "cmd",
+    "plugins": [
+      "@oclif/plugin-help"
+    ]
+  },
+  "repository": "akropp/cmd",
+  "scripts": {
+    "build": "tsc -b",
+    "watch-ts-cmd": "tsc -b -w --pretty",
+    "postpack": "rm -f oclif.manifest.json",
+    "posttest": "tslint -p . -t stylish",
+    "prepack": "npm run build && oclif-dev manifest && oclif-dev readme",
+    "test": "echo NO TESTS"
+  },
+  "types": "dist/index.d.ts"
+}
