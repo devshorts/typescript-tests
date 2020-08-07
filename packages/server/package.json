@@ -48,7 +48,7 @@
     "@paradox/core": "^1.0.0",
     "@overnightjs/core": "^1.6.9",
     "body-parser": "^1.19.0",
-    "class-transformer": "^0.2.3",
+    "class-transformer": "^0.3.1",
     "cls-hooked": "^4.2.2",
     "convict": "^5.1.0",
     "express": "^4.17.1",
