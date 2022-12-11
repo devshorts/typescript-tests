@@ -51,7 +51,7 @@
     "class-transformer": "^0.2.3",
     "cls-hooked": "^4.2.2",
     "convict": "^5.1.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-async-handler": "^1.1.4",
     "express-list-endpoints": "^4.0.1",
     "http-status-codes": "latest",
